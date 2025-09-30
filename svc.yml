@@ -4,7 +4,7 @@ metadata:
   name: state-svc
 spec:
   selector:
-    app: psotgress-stateful
+    app: psotgres-stateful
   clusterIp: None
   Ports:
     - targetPort: 5432

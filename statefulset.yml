@@ -11,9 +11,9 @@ spec:
   ServiceName: state-svc
   template:
     metadata:
-      name: psotgress-db-pod
+      name: postgress-db-pod
       labels: 
-        app: postgress-stateful
+        app: postgres-stateful
     spec:
       container:
         - name: postgress-container
