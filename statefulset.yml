@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet 
+metadata:
+  name: statefulSet-postgress
+spec:
+  minReadySeconds: 5
+  replicas: 2
+  selector:
+    matchlabels:
+      app: postgres-stateful 
+  ServiceName: state-svc
+  template:
+    metadata:
+      name: psotgress-db-pod
+      labels: 
+        app: postgress-stateful
+    spec:
+      container:
+        - name: postgress-container
+          image: postgres:18
+          Ports:
+            - ContainerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              value: dheeraj
+            - name: POSTGRES_USER
+              value: dhee@123
+            - name: POSTGRES_DB
+              value: devopsdb
+          volumeMounts:
+            - name: postgres-db-mount 
+              mountpath: /var/lib/postgressql/data
+      VolumeClaimTemplates:
+        - metadata:
+            name: postgres-db-mount
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 1Gi
